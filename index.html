@@ -45,18 +45,19 @@ html, body {
   position: relative;
 }
 #login input {
-  padding: 12px 20px;
-  font-size: 18px;
+  padding: 14px 25px;
+  font-size: 20px; /* أكبر من قبل */
   border-radius: 50px;
   border: none;
-  width: 200px;
+  width: 220px;
   text-align: center;
   outline: none;
+  text-shadow: 2px 2px 4px black; /* ظل أسود */
 }
 #login button {
   margin-top: 10px;
-  padding: 12px 20px;
-  font-size: 18px;
+  padding: 14px 25px;
+  font-size: 20px; /* أكبر */
   border-radius: 50px;
   border: none;
   background: #ff7aa3;
@@ -66,13 +67,14 @@ html, body {
 
 /* Content */
 #content { display: none; padding: 20px; position: relative; z-index:1; }
-#message { max-width: 700px; margin:auto; font-size: 20px; line-height:1.8; white-space: pre-wrap; }
+#message { max-width: 700px; margin:auto; font-size: 22px; line-height:2; white-space: pre-wrap; text-shadow: 2px 2px 4px black; }
 
 /* Slider */
 .slider {
   width: 90%;
   max-width: 350px;
   margin: 20px auto;
+  position: relative;
 }
 .slider img {
   width: 100%;
@@ -80,6 +82,20 @@ html, body {
   border-radius: 20px;
 }
 .slider img.active { display:block; }
+.slider button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 15px;
+  font-size: 20px;
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.slider #prev { left: 0; }
+.slider #next { right: 0; }
 
 /* Heart animation */
 .heart {
@@ -122,7 +138,7 @@ html, body {
 <div id="content">
   <h1>بحبك يا لوزه</h1>
   <div class="heart">❤️</div>
-  <p style="font-size:20px;">📅 1/10/2008 ❤️ <br>⏳ 117 days <span style="color:#ff6a95;">forever 💘♾️</span></p>
+  <p style="font-size:22px; text-shadow:2px 2px 4px black;">📅 1/10/2008 ❤️ <br>⏳ 117 days <span style="color:#ff6a95;">forever 💘♾️</span></p>
 
   <audio id="music" loop>
     <source src="audio/alf_leila.mp3" type="audio/mpeg">
@@ -131,6 +147,7 @@ html, body {
   <div id="message"></div>
 
   <div class="slider" id="slider">
+    <button id="prev" onclick="prev()">❮</button>
     <img src="img/img1.jpg" class="active">
     <img src="img/img2.jpg">
     <img src="img/img3.jpg">
@@ -139,6 +156,7 @@ html, body {
     <img src="img/img6.jpg">
     <img src="img/img7.jpg">
     <img src="img/img8.jpg">
+    <button id="next" onclick="next()">❯</button>
   </div>
 </div>
 
@@ -194,18 +212,10 @@ function typeMessage(){
 // Slider
 let index = 0;
 const imgs = document.querySelectorAll(".slider img");
-let startX = 0;
 function show(){ imgs.forEach(img=>img.classList.remove("active")); imgs[index].classList.add("active"); }
 function next(){ index=(index+1)%imgs.length; show(); }
+function prev(){ index=(index-1+imgs.length)%imgs.length; show(); }
 setInterval(next,5000);
-const slider = document.getElementById("slider");
-slider.addEventListener("touchstart", e=>{ startX = e.touches[0].clientX; });
-slider.addEventListener("touchend", e=>{
-  let endX = e.changedTouches[0].clientX;
-  if(startX - endX > 50) index=(index+1)%imgs.length;
-  else if(endX - startX >50) index=(index-1+imgs.length)%imgs.length;
-  show();
-});
 
 // Floating hearts
 function createHeart(){
@@ -219,7 +229,7 @@ function createHeart(){
 }
 setInterval(createHeart,300);
 
-// Floating love words from center
+// Floating love words
 function createWord(){
   const words=["love","love you","forever","بحبك","بعشقك","وبموت فيكي"];
   const word = document.createElement("div");
