@@ -43,6 +43,8 @@ html, body {
   padding: 50px 0;
   position: relative;
 }
+#login h2 { font-size: 32px; text-shadow:2px 2px 4px black; margin-bottom:10px; }
+#login p#newyear { font-size:24px; margin:5px; text-shadow:2px 2px 4px black; }
 #login input {
   padding: 14px 25px;
   font-size: 22px;
@@ -122,7 +124,6 @@ html, body {
 @keyframes floatUp { 0%{transform:translateY(0) scale(1); opacity:1;} 100%{transform:translateY(-800px) scale(1.5); opacity:0;} }
 @keyframes floatLove { 0%{transform:translateY(0) scale(1); opacity:1;} 100%{transform:translateY(-900px) scale(1.2); opacity:0;} }
 @keyframes floatSparkle { 0%{transform:translate(0,0) scale(1); opacity:1;} 100%{transform:translate(-100px,-800px) scale(1.5); opacity:0;} }
-
 </style>
 </head>
 <body>
@@ -133,6 +134,8 @@ html, body {
 <div id="sparklesContainer"></div>
 
 <div id="login">
+  <h2>سنة جديدة وانتي معايا</h2>
+  <p id="newyear">happy new year 🎄❤️‍🩹</p>
   <input type="password" id="pass" placeholder="Enter password">
   <button onclick="check()">Login</button>
   <p style="position:absolute; top:10px; left:10px; font-size:16px; color:white;">أقل حاجه ليكي ♾️💘</p>
@@ -140,6 +143,7 @@ html, body {
 
 <div id="content">
   <h1>بحبك يا لوزه</h1>
+  <div style="font-size:60px; text-shadow:2px 2px 4px black;">🎄</div> <!-- شجرة فوق القلب -->
   <div class="heart">❤️</div>
   <p style="font-size:22px; text-shadow:2px 2px 4px black;">📅 1/10/2008 ❤️ <br>⏳ 117 days <span style="color:#ff6a95;">forever 💘♾️</span></p>
 
@@ -203,12 +207,22 @@ const text = `هلا اي يعمري عامله اي
 وايام متتعوضش
 
 بحبك امواااههههه 💋💋💋`;
+
 let i=0;
 function typeMessage(){
   if(i<text.length){
     document.getElementById("message").innerHTML += text.charAt(i);
     i++;
     setTimeout(typeMessage,40);
+  } else {
+    // بعد انتهاء الرسالة أضف الرابط
+    const linkPara = document.createElement("p");
+    linkPara.style.fontSize = "20px";
+    linkPara.style.color = "#ff4d6d";
+    linkPara.style.textShadow = "1px 1px 2px black";
+    linkPara.innerHTML = `الحته ديه ليكي 💘: 
+      <a href="https://youtube.com/shorts/RrPrUsFy2D8?si=y34rwOdmP4OB_Ktg" target="_blank" style="color:#fff; text-decoration:underline;">اضغطي هنا لتشغيل الأغنية</a>`;
+    document.getElementById("message").appendChild(linkPara);
   }
 }
 
@@ -232,14 +246,14 @@ function createHeart(){
 }
 setInterval(createHeart,300);
 
-// Floating love words (anywhere on screen)
+// Floating love words
 function createWord(){
   const words=["love","love you","forever","بحبك","بعشقك","وبموت فيكي"];
   const word = document.createElement("div");
   word.classList.add("floating-love");
   word.innerText = words[Math.floor(Math.random()*words.length)];
   word.style.left = Math.random()*window.innerWidth+"px";
-  word.style.top = window.innerHeight + "px"; // start from bottom
+  word.style.top = window.innerHeight + "px"; 
   document.body.appendChild(word);
   setTimeout(()=>word.remove(),5000);
 }
