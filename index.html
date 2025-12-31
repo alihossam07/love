@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -6,141 +5,166 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>بحبك يا لوزه</title>
 <style>
-body{
-  margin:0;
-  font-family:'Arial Black', Arial, sans-serif;
-  text-align:center;
-  overflow:hidden;
-  background: linear-gradient(120deg, #ffc0cb, #ffb6c1, #ff69b4, #ff85a2);
+/* Body & background */
+body {
+  margin: 0;
+  font-family: 'Arial Black', Arial, sans-serif;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f7d1dc, #f2b6c4, #f9c6d3, #f7d1dc);
   background-size: 400% 400%;
-  animation: bgAnim 20s ease infinite;
-  color:white;
-  text-shadow: 2px 2px 4px black;
+  animation: bgAnim 30s ease infinite;
 }
-@keyframes bgAnim{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+@keyframes bgAnim {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
 }
-#login{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+
+/* Flowers */
+.flower {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: pink;
+  opacity: 0.7;
+  animation: floatFlower 15s linear infinite;
 }
-input,button{
-  padding:12px;
-  font-size:18px;
-  border-radius:10px;
-  border:none;
+@keyframes floatFlower {
+  0% {transform: translateY(0) scale(1);}
+  100% {transform: translateY(-800px) scale(1.5);}
 }
-button{margin-top:10px;}
-#content{display:none; padding:20px;}
-#message{
-  max-width:700px;
-  margin:auto;
-  font-size:20px;
-  line-height:1.9;
-  white-space:pre-wrap;
+
+/* Login heart shape */
+#login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
-.slider{
-  width:300px;
-  margin:30px auto;
+#login input {
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 50% 50% 50% 50%;
+  border: none;
+  width: 200px;
+  text-align: center;
+  background: #ffb6c1;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0% 35%);
 }
-.slider img{
-  width:100%;
-  display:none;
-  border-radius:15px;
+#login button {
+  margin-top: 10px;
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
 }
-.slider img.active{display:block;}
-.slider button{margin:10px;}
-.heart{
-  font-size:60px;
+
+/* Content */
+#content { display: none; padding: 20px; position: relative; z-index:1; }
+#message { max-width: 700px; margin:auto; font-size: 20px; line-height:1.8; white-space: pre-wrap; }
+
+/* Slider */
+.slider {
+  width: 90%;
+  max-width: 350px;
+  margin: 20px auto;
+}
+.slider img {
+  width: 100%;
+  display: none;
+  border-radius: 20px;
+}
+.slider img.active { display:block; }
+
+/* Heart animation */
+.heart {
+  font-size: 60px;
   animation: beat 1s infinite;
-  color:#ff4d6d;
-  text-shadow:0 0 10px #ff4d6d,0 0 20px #ffc0cb;
+  color: #ff4d6d;
+  text-shadow:0 0 10px #ff4d6d, 0 0 20px #ffc0cb;
 }
-@keyframes beat{
-  0%{transform:scale(1);}
-  25%{transform:scale(1.2);}
-  50%{transform:scale(1.5);}
-  75%{transform:scale(1.2);}
-  100%{transform:scale(1);}
+@keyframes beat {
+  0% {transform:scale(1);}
+  25% {transform:scale(1.2);}
+  50% {transform:scale(1.5);}
+  75% {transform:scale(1.2);}
+  100% {transform:scale(1);}
 }
-.floating-heart{
+
+/* Floating hearts & words */
+.floating-heart, .floating-word, .floating-love {
   position:absolute;
-  font-size:20px;
-  color:#ff4d6d;
-  animation: floatUp 5s linear infinite;
   user-select:none;
 }
-@keyframes floatUp{
-  0% { transform: translateY(0) scale(1); opacity:1; }
-  100% { transform: translateY(-800px) scale(1.5); opacity:0; }
-}
-.floating-word{
-  position:absolute;
-  font-size:16px;
-  color:white;
-  opacity:0.6;
-  user-select:none;
-}
+.floating-heart { font-size: 20px; color:#ff4d6d; animation: floatUp 5s linear infinite; }
+.floating-word { font-size:16px; color:white; opacity:0.6; }
+.floating-love { font-size:22px; color:#ff4d6d; font-weight:bold; animation: floatLove 4s linear forwards; }
+@keyframes floatUp { 0%{transform:translateY(0) scale(1); opacity:1;} 100%{transform:translateY(-800px) scale(1.5); opacity:0;} }
+@keyframes floatLove { 0%{transform:translate(-50%,0) scale(1); opacity:1;} 100%{transform:translate(-50%,-600px) scale(1.3); opacity:0;} }
+
 </style>
 </head>
 <body>
 
-<div id="heartsContainer"></div>
-<div id="wordsContainer"></div>
+<div id="flowersContainer"></div>
 
 <div id="login">
-  <h2>🔒 دخلي الباسورد</h2>
-  <input type="password" id="pass">
-  <button onclick="check()">دخول</button>
-  <p style="position:absolute; top:10px; left:10px; font-size:16px; color:white;">أبسط شيئ أقدمه ليكي ♾️💘</p>
+  <input type="password" id="pass" placeholder="💖">
+  <button onclick="check()">Login</button>
 </div>
 
 <div id="content">
   <h1>بحبك يا لوزه</h1>
   <div class="heart">❤️</div>
-  <p style="font-size:20px;">
-    📅 1/10/2008 ❤️ <br>
-    ⏳ 117 يوم <span style="color:#ff4d6d;">forever 💘♾️</span>
-  </p>
+  <p style="font-size:20px;">📅 1/10/2008 ❤️ <br>⏳ 117 days <span style="color:#ff4d6d;">forever 💘♾️</span></p>
 
-  <audio autoplay loop>
-    <source src="audio/alf_leila.mp3" type="audio/mpeg">
+  <audio id="music" loop>
+    <source src="audio/alf_lleila.mp3" type="audio/mpeg">
   </audio>
 
   <div id="message"></div>
 
-  <div class="slider">
-  <img src="img/img1.jpg" class="active">
-  <img src="img/img2.jpg">
-  <img src="img/img3.jpg">
-  <img src="img/img4.jpg">
-  <img src="img/img5.jpg">
-  <img src="img/img6.jpg">
-  <img src="img/img7.jpg">
-  <img src="img/img8.jpg">
-    <br>
-    <button onclick="prev()">⬅</button>
-    <button onclick="next()">➡</button>
+  <div class="slider" id="slider">
+    <img src="img/img1.jpeg" class="active">
+    <img src="img/img2.jpeg">
+    <img src="img/img3.jpeg">
+    <img src="img/img4.jpeg">
+    <img src="img/img5.jpeg">
+    <img src="img/img6.jpeg">
+    <img src="img/img7.jpeg">
+    <img src="img/img8.jpeg">
   </div>
 </div>
 
 <script>
-function check(){
+// Password check & play music
+function check() {
   let pass = document.getElementById("pass").value.trim();
-  if(pass==="692025"){
-    document.getElementById("login").style.display="none";
-    document.getElementById("content").style.display="block";
-    typeMessage();
+  if(pass === "692025") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("content").style.display = "block";
+
+    const music = document.getElementById("music");
+    music.play().catch(e => console.log("Audio play failed:", e));
+
+    if(typeof typeMessage === "function") typeMessage();
   } else {
-    alert("الباسورد غلط");
+    alert("Password is incorrect");
   }
 }
 
+// Typing message
 const text = `هلا اي يعمري عامله اي  
 بما ان طبعا مش هعرف اجيبلك حاجه عشان العيله الكريمه  
 ف يعني دي اقل حاجه اقدر اقدمهالك  
@@ -163,7 +187,6 @@ const text = `هلا اي يعمري عامله اي
 وايام متتعوضش  
 
 بحبك امواااههههه 💋💋💋`;
-
 let i=0;
 function typeMessage(){
   if(i<text.length){
@@ -173,35 +196,58 @@ function typeMessage(){
   }
 }
 
-let index=0;
-const imgs=document.querySelectorAll(".slider img");
-function show(){imgs.forEach(img=>img.classList.remove("active")); imgs[index].classList.add("active");}
-function next(){index=(index+1)%imgs.length; show();}
-function prev(){index=(index-1+imgs.length)%imgs.length; show();}
-setInterval(next,30000);
+// Slider
+let index = 0;
+const imgs = document.querySelectorAll(".slider img");
+let startX = 0;
+function show(){ imgs.forEach(img=>img.classList.remove("active")); imgs[index].classList.add("active"); }
+function next(){ index=(index+1)%imgs.length; show(); }
+setInterval(next,5000);
+const slider = document.getElementById("slider");
+slider.addEventListener("touchstart", e=>{ startX = e.touches[0].clientX; });
+slider.addEventListener("touchend", e=>{
+  let endX = e.changedTouches[0].clientX;
+  if(startX - endX > 50) index=(index+1)%imgs.length;
+  else if(endX - startX >50) index=(index-1+imgs.length)%imgs.length;
+  show();
+});
 
+// Floating hearts
 function createHeart(){
   const heart = document.createElement("div");
   heart.classList.add("floating-heart");
   heart.style.left=Math.random()*window.innerWidth+"px";
   heart.style.fontSize=(10+Math.random()*20)+"px";
   heart.innerText="❤️";
-  document.getElementById("heartsContainer").appendChild(heart);
+  document.body.appendChild(heart);
   setTimeout(()=>heart.remove(),5000);
 }
 setInterval(createHeart,300);
 
-function createWord(){
-  const words=["love","love you","forever"];
+// Floating love words from center
+function createLoveWord(){
+  const words=["بحبك","بعشقك","وبموت فيكي"];
   const word = document.createElement("div");
-  word.classList.add("floating-word");
-  word.innerText=words[Math.floor(Math.random()*words.length)];
-  word.style.left=Math.random()*window.innerWidth+"px";
-  word.style.top=Math.random()*window.innerHeight+"px";
-  document.getElementById("wordsContainer").appendChild(word);
+  word.classList.add("floating-love");
+  word.innerText = words[Math.floor(Math.random()*words.length)];
+  word.style.left="50%";
+  word.style.top="70%";
+  document.body.appendChild(word);
   setTimeout(()=>word.remove(),4000);
 }
-setInterval(createWord,500);
+setInterval(createLoveWord,600);
+
+// Flowers
+for(let i=0;i<20;i++){
+  const flower=document.createElement("div");
+  flower.classList.add("flower");
+  flower.style.left=Math.random()*window.innerWidth+"px";
+  flower.style.top=Math.random()*window.innerHeight+"px";
+  flower.style.width=(5+Math.random()*10)+"px";
+  flower.style.height=flower.style.width;
+  flower.style.background="hsl("+Math.random()*360+",70%,80%)";
+  document.getElementById("flowersContainer").appendChild(flower);
+}
 </script>
 
 </body>
