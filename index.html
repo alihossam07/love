@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>بحبك يا لوزه</title>
 <style>
-/* Body & background */
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: auto;
   font-family: 'Arial Black', Arial, sans-serif;
   text-align: center;
   color: white;
-  overflow: hidden;
-  background: linear-gradient(135deg, #f7d1dc, #f2b6c4, #f9c6d3, #f7d1dc);
+  overflow-y: auto;
+  background: linear-gradient(135deg, #ffe0eb, #ffc9dd, #ffd6e6, #ffe0eb);
   background-size: 400% 400%;
   animation: bgAnim 30s ease infinite;
 }
@@ -25,47 +26,40 @@ body {
 /* Flowers */
 .flower {
   position: absolute;
-  width: 10px;
-  height: 10px;
   border-radius: 50%;
-  background: pink;
   opacity: 0.7;
-  animation: floatFlower 15s linear infinite;
+  animation: floatFlower 25s linear infinite;
 }
 @keyframes floatFlower {
-  0% {transform: translateY(0) scale(1);}
-  100% {transform: translateY(-800px) scale(1.5);}
+  0% {transform: translateY(0) rotate(0deg);}
+  100% {transform: translateY(-900px) rotate(360deg);}
 }
 
-/* Login heart shape */
+/* Login */
 #login {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 50px 0;
   position: relative;
 }
 #login input {
   padding: 12px 20px;
   font-size: 18px;
-  border-radius: 50% 50% 50% 50%;
+  border-radius: 50px;
   border: none;
   width: 200px;
   text-align: center;
-  background: #ffb6c1;
-  color: white;
-  font-weight: bold;
   outline: none;
-  clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0% 35%);
 }
 #login button {
   margin-top: 10px;
   padding: 12px 20px;
   font-size: 18px;
-  border-radius: 10px;
+  border-radius: 50px;
   border: none;
-  background: #ff4d6d;
+  background: #ff7aa3;
   color: white;
   cursor: pointer;
 }
@@ -91,8 +85,8 @@ body {
 .heart {
   font-size: 60px;
   animation: beat 1s infinite;
-  color: #ff4d6d;
-  text-shadow:0 0 10px #ff4d6d, 0 0 20px #ffc0cb;
+  color: #ff6a95;
+  text-shadow:0 0 10px #ff6a95, 0 0 20px #ffc0d0;
 }
 @keyframes beat {
   0% {transform:scale(1);}
@@ -103,47 +97,48 @@ body {
 }
 
 /* Floating hearts & words */
-.floating-heart, .floating-word, .floating-love {
+.floating-heart, .floating-love {
   position:absolute;
   user-select:none;
 }
-.floating-heart { font-size: 20px; color:#ff4d6d; animation: floatUp 5s linear infinite; }
-.floating-word { font-size:16px; color:white; opacity:0.6; }
-.floating-love { font-size:22px; color:#ff4d6d; font-weight:bold; animation: floatLove 4s linear forwards; }
+.floating-heart { font-size: 20px; color:#ff6a95; animation: floatUp 5s linear infinite; }
+.floating-love { font-size:22px; color:#ff4d6d; font-weight:bold; animation: floatLove 6s linear forwards; }
 @keyframes floatUp { 0%{transform:translateY(0) scale(1); opacity:1;} 100%{transform:translateY(-800px) scale(1.5); opacity:0;} }
 @keyframes floatLove { 0%{transform:translate(-50%,0) scale(1); opacity:1;} 100%{transform:translate(-50%,-600px) scale(1.3); opacity:0;} }
-
 </style>
 </head>
 <body>
 
 <div id="flowersContainer"></div>
+<div id="heartsContainer"></div>
+<div id="wordsContainer"></div>
 
 <div id="login">
-  <input type="password" id="pass" placeholder="💖">
+  <input type="password" id="pass" placeholder="Enter password">
   <button onclick="check()">Login</button>
+  <p style="position:absolute; top:10px; left:10px; font-size:16px; color:white;">أقل حاجه ليكي ♾️💘</p>
 </div>
 
 <div id="content">
   <h1>بحبك يا لوزه</h1>
   <div class="heart">❤️</div>
-  <p style="font-size:20px;">📅 1/10/2008 ❤️ <br>⏳ 117 days <span style="color:#ff4d6d;">forever 💘♾️</span></p>
+  <p style="font-size:20px;">📅 1/10/2008 ❤️ <br>⏳ 117 days <span style="color:#ff6a95;">forever 💘♾️</span></p>
 
   <audio id="music" loop>
-    <source src="audio/alf_lleila.mp3" type="audio/mpeg">
+    <source src="audio/alf_leila.mp3" type="audio/mpeg">
   </audio>
 
   <div id="message"></div>
 
   <div class="slider" id="slider">
-    <img src="img/img1.jpeg" class="active">
-    <img src="img/img2.jpeg">
-    <img src="img/img3.jpeg">
-    <img src="img/img4.jpeg">
-    <img src="img/img5.jpeg">
-    <img src="img/img6.jpeg">
-    <img src="img/img7.jpeg">
-    <img src="img/img8.jpeg">
+    <img src="img/img1.jpg" class="active">
+    <img src="img/img2.jpg">
+    <img src="img/img3.jpg">
+    <img src="img/img4.jpg">
+    <img src="img/img5.jpg">
+    <img src="img/img6.jpg">
+    <img src="img/img7.jpg">
+    <img src="img/img8.jpg">
   </div>
 </div>
 
@@ -225,27 +220,28 @@ function createHeart(){
 setInterval(createHeart,300);
 
 // Floating love words from center
-function createLoveWord(){
-  const words=["بحبك","بعشقك","وبموت فيكي"];
+function createWord(){
+  const words=["love","love you","forever","بحبك","بعشقك","وبموت فيكي"];
   const word = document.createElement("div");
   word.classList.add("floating-love");
   word.innerText = words[Math.floor(Math.random()*words.length)];
   word.style.left="50%";
-  word.style.top="70%";
+  word.style.top="50%";
   document.body.appendChild(word);
   setTimeout(()=>word.remove(),4000);
 }
-setInterval(createLoveWord,600);
+setInterval(createWord,800);
 
 // Flowers
-for(let i=0;i<20;i++){
+for(let i=0;i<25;i++){
   const flower=document.createElement("div");
   flower.classList.add("flower");
   flower.style.left=Math.random()*window.innerWidth+"px";
   flower.style.top=Math.random()*window.innerHeight+"px";
-  flower.style.width=(5+Math.random()*10)+"px";
-  flower.style.height=flower.style.width;
-  flower.style.background="hsl("+Math.random()*360+",70%,80%)";
+  let size = 5+Math.random()*10;
+  flower.style.width = size + "px";
+  flower.style.height = size + "px";
+  flower.style.background = "hsl("+Math.random()*360+",70%,85%)";
   document.getElementById("flowersContainer").appendChild(flower);
 }
 </script>
